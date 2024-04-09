@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
         _moveInput = Input.GetAxis("Horizontal");
         _rb.velocity = new Vector2(_moveInput * MoveSpeed, _rb.velocity.y);
 
+        // Проводим луч до земли
         var hit = Physics2D.Raycast(_rb.position, Vector2.down, RayDistance, LayerMask.GetMask("Ground"));
 
         if(hit.collider != null) _isGrounded = true;
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Обработчик события столкновения с другими объектами
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if(collision.CompareTag("Coin"))
